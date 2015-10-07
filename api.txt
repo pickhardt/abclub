@@ -1,0 +1,50 @@
+Language agnostic blueprint
+---------------------------
+
+ABClub
+  the main place for registering tests, running tests, setting project-wide settings, etc.
+
+
+ABClubExperiment
+  a class representing an experiment
+
+ABClubStorage
+  an abstract class representing storage of experiment/variation pairs
+  main implementations will be either in a cookie or a database associated with a user
+
+ABClubCookieStorage
+  implements ABClubStorage with cookies
+
+ABClubUserStorage
+  implements ABClubStorage with a user model, stored in a database presumably
+
+ABClub.settings(name, value)
+
+ABClub.settings(hash)
+
+ABClub.reguster(options)
+
+ABClub.register_test({
+  name: "button_color",
+  optimizely_id: "x39010",
+  variations: {
+    "blue": {
+      optimizely_id: "v19309",
+      probability: 1.0 / 3.0,
+    },
+    "green": {
+      optimizely_id: "v19310"
+      probability: 1.0 / 3.0,
+    },
+    "brown": {
+      optimizely_id: "v19312"
+      probability: 1.0 / 3.0,
+    }
+  }
+})
+
+ABClub.test(name).variant
+  returns string of variant name
+
+ABClub.test(name).is?(variant)
+  returns boolean if it is variant name
